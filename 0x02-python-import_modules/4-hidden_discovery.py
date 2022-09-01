@@ -1,11 +1,6 @@
 #!/usr/bin/python3
-import hidden_4
-
-def discovr():
-    name = dir(hidden_4)
-    for i in name:
-        if i[:2] != '__':
-            print("{:s}".format(i))
-
 if __name__ == "__main__":
-    discovr()
+    import hidden_4
+    for a in dir(hidden_4):
+        if a[0] != "_" and a[1] != "_":
+            print("{}".format(a))
