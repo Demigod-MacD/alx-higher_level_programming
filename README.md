@@ -1,1 +1,1 @@
-This is a readme on alx higher level programming - Python
+This is a readme for higher level programming - python
