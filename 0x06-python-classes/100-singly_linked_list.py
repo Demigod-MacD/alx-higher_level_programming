@@ -1,69 +1,82 @@
 #!/usr/bin/python3
-"""
-This module defines a Singly linked list
-"""
+"""module for a singly linked list"""
 
 
 class Node:
+    """"defines a node"""
+
     def __init__(self, data, next_node=None):
-        """Defines a node for a singly linked list
-        """
+        """initializes the node with instance variables"""
+
         self.data = data
         self.next_node = next_node
 
     @property
     def data(self):
-        return self.__data
+        """gets data attribute"""
+
+        return (self.__data)
 
     @data.setter
     def data(self, value):
-        if type(value) != int:
-            raise TypeError('data must be an integer')
+        """sets data attribute"""
 
+        if not isinstance(value, int):
+            raise TypeError('data must be an integer')
         self.__data = value
 
     @property
     def next_node(self):
-        return self.__next_node
+        """get next_node attribute
+        Returns: next node
+        """
+
+        return (self.__next_node)
 
     @next_node.setter
     def next_node(self, value):
-        if value is not None and type(value) != Node:
+        """set value of next node"""
+
+        if (value is not None and not isinstance(value, Node)):
             raise TypeError('next_node must be a Node object')
+
         self.__next_node = value
 
 
 class SinglyLinkedList:
+    """defines a singly linked list"""
+
     def __init__(self):
-        """Defines the singly linked list
-        """
-        self.__head = None
+        """Initializes the singly linked list"""
+
+        self.head = None
+
+    def __str__(self):
+        """make list printable"""
+
+        printsll = ""
+        location = self.head
+        while location:
+            printsll += str(location.data) + "\n"
+            location = location.next_node
+        return printsll[:-1]
 
     def sorted_insert(self, value):
-        if self.__head is None:
-            self.__head = Node(value)
-        else:
-            current = self.__head
-            previous = None
-            while current and value > current.data:
-                previous = current
-                current = current.next_node
-            if current is None:
-                previous.next_node = Node(value)
-            elif current is self.__head and previous is None:
-                self.__head = Node(value, current)
-            else:
-                newNode = Node(value, current)
-                previous.next_node = newNode
-
-    def __repr__(self):
-        node = self.__head
-        txt = ''
-        while 1:
-            txt += str(node.data)
-            node = node.next_node
-            if node.next_node is None:
-                break
-            else:
-                txt += '\n'
-        return txt
+        """insert in a sorted fashion
+        Args:
+            value: what the value will be on the node
+        """
+        new = Node(value)
+        if not self.head:
+            self.head = new
+            return
+        if value < self.head.data:
+            new.next_node = self.head
+            self.head = new
+            return
+        location = self.head
+        while location.next_node and location.next_node.data < value:
+            location = location.next_node
+        if location.next_node:
+            new.next_node = location.next_node
+        location.next_node = new
