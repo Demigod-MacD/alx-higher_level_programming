@@ -8,7 +8,7 @@ s = "ложка не существует"
 lib.print_python_string(s)
 s = "La cuillère n'existe pas"
 lib.print_python_string(s)
-s = "勺�"
+s = "勺孨"
 lib.print_python_string(s)
 s = "숟가락은 존재하지 않는다."
 lib.print_python_string(s)
